@@ -1,0 +1,13 @@
+﻿Public Class PlanetWeight
+    Private Sub btnDisplay_Click(sender As Object, e As EventArgs) Handles btnDisplay.Click
+        Dim decWeight As Decimal : Dim decPounds As Decimal : Dim decKg As Decimal : Dim decVenusLb As Decimal = 0.907D : Dim decMarsLb As Decimal = 0.377D : Dim decConvertKg As Decimal = 0.454D
+        If IsNumeric(txtWeight.Text) Then : decWeight = Convert.ToDecimal(txtWeight.Text)
+            If decWeight > 0 Then : If radVenus.Checked Then : decPounds = decVenusLb * decWeight : ElseIf radMars.Checked Then : decPounds = decMarsLb * decWeight
+                End If : decKg = decPounds * decConvertKg : lblResultKg.Text = decKg.ToString("n1") : lblResultPound.Text = decPounds.ToString("n1")
+                Me.lblResultKg.Visible = True : Me.lblResultPound.Visible = True : Else
+                MsgBox("You Entered " & decWeight.ToString() & " Enter a positive number.", , "Input Error") : txtWeight.Text = "" : txtWeight.Focus() : End If
+        Else : MsgBox("Enter your weight in Earth pounds as a numeric value.", , "Input Error") : txtWeight.Text = "" : txtWeight.Focus() : End If : End Sub
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        txtWeight.Clear() : lblResultKg.Text = "" : lblResultPound.Text = "" : radVenus.Checked = False : radMars.Checked = False : End Sub
+    Private Sub PlanetWeight_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        txtWeight.Focus() : lblResultPound.Text = "" : lblResultKg.Text = "" : End Sub : End Class
